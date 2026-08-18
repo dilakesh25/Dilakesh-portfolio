@@ -5,7 +5,8 @@ import {
   ArrowUpRight, DownloadCloud, Sparkles, Check
 } from "lucide-react";
 
-const API_BASE = import.meta.env.VITE_API_URL || "/api";
+const RAW_API = import.meta.env.VITE_API_URL || "https://backend-beige-one-84.vercel.app";
+const API_BASE = RAW_API.endsWith("/api") ? RAW_API : `${RAW_API.replace(/\/+$/, "")}/api`;
 
 export default function AdminDashboard({ onClose, onDataUpdated }) {
   const [token, setToken] = useState(localStorage.getItem("dilakesh_admin_token") || "");

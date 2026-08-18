@@ -8,7 +8,8 @@ import {
 import "./styles.css";
 import AdminDashboard from "./AdminDashboard";
 
-const API_BASE = import.meta.env.VITE_API_URL || "/api";
+const RAW_API = import.meta.env.VITE_API_URL || "https://backend-beige-one-84.vercel.app";
+const API_BASE = RAW_API.endsWith("/api") ? RAW_API : `${RAW_API.replace(/\/+$/, "")}/api`;
 
 // Initial Fallback Skills
 const defaultSkills = [
@@ -156,7 +157,7 @@ function App() {
 
   // Track Resume Download
   const handleResumeDownload = () => {
-    fetch(`${API_BASE}/stats/resume-download`, { method: "POST" }).catch(() => {});
+    fetch(`${API_BASE}/stats/resume-download`, { method: "POST" }).catch(() => { });
   };
 
   return (
@@ -176,9 +177,9 @@ function App() {
             <ShieldCheck size={16} />
             <span>Admin</span>
           </button>
-          <a className="nav-cta" href="mailto:dilakesh756@gmail.com">Let's connect <ArrowUpRight size={16}/></a>
+          <a className="nav-cta" href="mailto:dilakesh756@gmail.com">Let's connect <ArrowUpRight size={16} /></a>
           <button className="menu" onClick={() => setOpen(!open)} aria-label="Toggle navigation">
-            {open ? <X size={22}/> : <Menu size={22}/>}
+            {open ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </header>
@@ -188,7 +189,7 @@ function App() {
         <section id="home" className="hero section">
           <div className="hero-grid">
             <div>
-              <div className="eyebrow"><span className="dot"/> Available for opportunities</div>
+              <div className="eyebrow"><span className="dot" /> Available for opportunities</div>
               <h1>Building reliable <em>SAP solutions</em> with purpose.</h1>
               <p className="hero-copy">
                 I'm <strong>Dilakesh Shanmugadivel</strong>, an SAP ABAP S/4HANA Developer
@@ -196,7 +197,7 @@ function App() {
               </p>
               <div className="actions">
                 <button className="primary" onClick={() => go("projects")}>
-                  Explore My Projects <ArrowUpRight size={18}/>
+                  Explore My Projects <ArrowUpRight size={18} />
                 </button>
                 <a
                   href="/assets/Dilakesh_Resume.pdf"
@@ -204,23 +205,23 @@ function App() {
                   className="secondary"
                   onClick={handleResumeDownload}
                 >
-                  Download Resume <Download size={17}/>
+                  Download Resume <Download size={17} />
                 </a>
                 <button className="secondary" onClick={() => go("contact")}>
-                  Get in touch <Mail size={17}/>
+                  Get in touch <Mail size={17} />
                 </button>
               </div>
               <div className="hero-meta">
-                <span><MapPin size={16}/> Bengaluru, India</span>
-                <span><BriefcaseBusiness size={16}/> SAP ABAP S/4HANA Developer</span>
+                <span><MapPin size={16} /> Bengaluru, India</span>
+                <span><BriefcaseBusiness size={16} /> SAP ABAP S/4HANA Developer</span>
               </div>
             </div>
             <div className="hero-profile">
               <div className="profile-ring">
-                <img src="/assets/profile.jpg" alt="Dilakesh Shanmugadivel" className="profile-img" onError={(e)=>{e.target.src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=80"}}/>
+                <img src="/assets/profile.jpg" alt="Dilakesh Shanmugadivel" className="profile-img" onError={(e) => { e.target.src = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=80" }} />
               </div>
               <div className="profile-badge">
-                <Code2 size={16}/>
+                <Code2 size={16} />
                 <span>SAP ABAP Developer</span>
               </div>
             </div>
@@ -231,7 +232,7 @@ function App() {
         <section id="about" className="section about">
           <div className="section-label">01 / ABOUT</div>
           <div className="two-col">
-            <h2>Developer mindset,<br/><em>enterprise discipline.</em></h2>
+            <h2>Developer mindset,<br /><em>enterprise discipline.</em></h2>
             <div>
               <p className="lead">
                 SAP ABAP S/4HANA Developer with hands-on experience at Accenture in
@@ -254,7 +255,7 @@ function App() {
         <section id="projects" className="projects-section">
           <div className="section-label">02 / FEATURED PROJECTS</div>
           <div className="two-col">
-            <h2>Crafted with code &<br/><em>enterprise rigor.</em></h2>
+            <h2>Crafted with code &<br /><em>enterprise rigor.</em></h2>
             <p className="lead">
               A curated selection of SAP S/4HANA integrations, ABAP custom solutions,
               and full-stack tools.
@@ -302,14 +303,14 @@ function App() {
           {experiences.length > 0 ? (
             experiences.map((exp) => (
               <div key={exp._id} className="experience-card">
-                <div className="timeline-dot"/>
+                <div className="timeline-dot" />
                 <div className="exp-top">
                   <div>
                     <p className="eyebrow">{exp.startDate} — {exp.endDate}</p>
                     <h2>{exp.role}</h2>
                     <h3>{exp.company} · {exp.location || "Bengaluru, India"}</h3>
                   </div>
-                  <span className="role-icon"><Server size={25}/></span>
+                  <span className="role-icon"><Server size={25} /></span>
                 </div>
                 {exp.bullets && exp.bullets.length > 0 && (
                   <ul>
@@ -326,14 +327,14 @@ function App() {
           ) : (
             <>
               <div className="experience-card">
-                <div className="timeline-dot"/>
+                <div className="timeline-dot" />
                 <div className="exp-top">
                   <div>
                     <p className="eyebrow">JAN 2026 — PRESENT</p>
                     <h2>SAP ABAP Junior Developer</h2>
                     <h3>Accenture · Bengaluru, India</h3>
                   </div>
-                  <span className="role-icon"><Server size={25}/></span>
+                  <span className="role-icon"><Server size={25} /></span>
                 </div>
                 <ul>
                   <li>Designed, developed and maintained classical reports, ALV reports, interfaces and enhancements aligned with business requirements and SDLC standards.</li>
@@ -345,13 +346,13 @@ function App() {
               </div>
 
               <div className="training-card">
-                <div className="training-icon"><Sparkles size={21}/></div>
+                <div className="training-icon"><Sparkles size={21} /></div>
                 <div>
                   <p className="eyebrow">AUG 2025 — DEC 2025</p>
                   <h3>SAP ABAP Development on S/4HANA Training</h3>
                   <p>Accenture · Remote</p>
                   <div className="tag-row">
-                    {["ALV Reports","BDC Programs","CDS Views","OData Services","Enhancements"].map(x => <span key={x}>{x}</span>)}
+                    {["ALV Reports", "BDC Programs", "CDS Views", "OData Services", "Enhancements"].map(x => <span key={x}>{x}</span>)}
                   </div>
                 </div>
               </div>
@@ -363,13 +364,13 @@ function App() {
         <section id="skills" className="section skills">
           <div className="section-label">04 / SKILLS</div>
           <div className="two-col skills-head">
-            <h2>Tools I use to<br/><em>solve problems.</em></h2>
+            <h2>Tools I use to<br /><em>solve problems.</em></h2>
             <p>My technical toolkit combines SAP development capabilities with software engineering and quality practices.</p>
           </div>
           <div className="skill-grid">
             {technicalSkills.map((skill, i) => (
               <div className="skill" key={skill}>
-                <span>{String(i+1).padStart(2,"0")}</span>{skill}
+                <span>{String(i + 1).padStart(2, "0")}</span>{skill}
               </div>
             ))}
           </div>
@@ -383,7 +384,7 @@ function App() {
         <section id="education" className="section education">
           <div className="section-label">05 / EDUCATION</div>
           <div className="education-card">
-            <div className="edu-icon"><GraduationCap size={30}/></div>
+            <div className="edu-icon"><GraduationCap size={30} /></div>
             <div>
               <p className="eyebrow">2025</p>
               <h2>Bachelor of Technology in Information Technology</h2>
@@ -402,13 +403,13 @@ function App() {
           <div className="contact-box">
             <div>
               <div className="section-label">06 / CONTACT</div>
-              <h2>Let's build something<br/><em>meaningful.</em></h2>
+              <h2>Let's build something<br /><em>meaningful.</em></h2>
               <p>Have an opportunity, project or simply want to connect? Send a direct message or reach out via email/phone.</p>
 
               <div className="contact-links">
-                <a href="mailto:dilakesh756@gmail.com"><Mail size={19}/><span>dilakesh756@gmail.com</span><ArrowUpRight/></a>
-                <a href="tel:+917010452001"><Phone size={19}/><span>+91 7010452001</span><ArrowUpRight/></a>
-                <div><MapPin size={19}/><span>Bengaluru, India</span></div>
+                <a href="mailto:dilakesh756@gmail.com"><Mail size={19} /><span>dilakesh756@gmail.com</span><ArrowUpRight /></a>
+                <a href="tel:+917010452001"><Phone size={19} /><span>+91 7010452001</span><ArrowUpRight /></a>
+                <div><MapPin size={19} /><span>Bengaluru, India</span></div>
               </div>
             </div>
 
