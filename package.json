@@ -1,15 +1,15 @@
 {
-  "name": "dilakesh-portfolio",
+  "name": "dilakesh-portfolio-workspace",
   "private": true,
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "server": "node server/server.js",
-    "seed": "node server/seed.js",
-    "start": "node server/server.js"
+    "dev": "npm --prefix frontend run dev",
+    "build": "npm --prefix frontend run build",
+    "preview": "npm --prefix frontend run preview",
+    "server": "npm --prefix backend run dev",
+    "seed": "npm --prefix backend run seed",
+    "start": "npm --prefix backend run start"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^4.3.1",

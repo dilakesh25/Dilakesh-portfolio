@@ -25,14 +25,10 @@ connectDB();
 /* ─── Middleware ─── */
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "http://localhost:4173",
-      "http://localhost:3000",
-      "http://127.0.0.1:5173",
-      process.env.FRONTEND_URL,
-    ].filter(Boolean),
+    origin: true,
     credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 app.use(express.json());
@@ -53,17 +49,17 @@ app.get("/api/health", (req, res) => {
 });
 
 /* ─── Serve static build in production ─── */
-const distPath = join(__dirname, "..", "dist");
+const distPath = join(__dirname, "..", "frontend", "dist");
 app.use(express.static(distPath));
 
-// Fallback for SPA routing in production (Express 5 compatible)
+// Fallback for SPA routing in production
 app.use((req, res, next) => {
   if (req.path.startsWith("/api")) {
     return res.status(404).json({ success: false, error: "API Route not found" });
   }
   res.sendFile(join(distPath, "index.html"), (err) => {
     if (err) {
-      res.status(200).send("Portfolio API Server is running. Start the Vite frontend dev server with npm run dev.");
+      res.status(200).send("Portfolio API Server is running.");
     }
   });
 });
